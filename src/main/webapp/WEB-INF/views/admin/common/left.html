@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>文章管理</title>
+  <link th:href="@{/static/layui/css/layui.css}" rel="stylesheet"/>
+</head>
+<body class="layui-layout-body">
+
+  <div class="layui-side layui-bg-black" th:fragment="leftbar">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li th:class="'layui-nav-item'+' '+${activeUri=='article'?'layui-this':''}">
+          <a class="" href="/blog/admin/article">文章管理</a>
+        </li>
+        <li th:class="'layui-nav-item'+' '+${activeUri=='comments'?'layui-this':''}">
+          <a href="/blog/admin/comments">评论管理</a>
+        </li>
+        <li class="layui-nav-item"><a href="javascript:;">公告管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">相册管理</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</body>

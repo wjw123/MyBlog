@@ -1,0 +1,283 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link th:href="@{/static/layui/css/layui.css}" rel="stylesheet"/>
+  <link th:href="@{/static/layui/css/global.css}" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layui-layout layui-layout-admin">
+
+  <div class="layui-header">
+      <div class="layui-container">
+        <a class="layui-logo" href="/blog"> 
+          <img th:src="@{/static/img/logo.png}" alt="layui">
+        </a>
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="/blog">浏览文章</a></li>
+      <li class="layui-nav-item"><a href="">相册记录</a></li>
+      <li class="layui-nav-item"><a href="">用户留言</a></li>
+      <li class="layui-nav-item"><a href="javascript:;">关于我</a></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          贤心
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">退了</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/blog/login">登录</a></li>
+      <li class="layui-nav-item"><a href="/blog/admin/article">进入后台</a></li>
+    </ul>
+    </div>
+  </div>
+
+    <div class="layui-container container">
+      <div class="row">
+
+      <div class="layui-col-xs0 layui-col-sm0 layui-col-md8">
+
+        <div class="row">
+        <div class="layui-carousel" id="test1" lay-filter="test1">
+          <div carousel-item="">
+            <div><img th:src="@{/static/img/post1.jpg}"><a href="">06666</a></div>
+            <div><img th:src="@{/static/img/post2.jpg}">222</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+       <div th:each="item:${aritcles}" class="blog-list">
+            <div class="blog">
+              <div class="title">
+                <span class="category">
+                  技术
+                  <i></i>
+                </span>
+                <a th:href="'/blog/article/'+${item.id}" th:text="${item.title}"></a>
+              </div> 
+
+              <div class="hint">
+                <span>
+                  <i class="layui-icon author">&#xe66f;</i>
+                  博主
+                </span>
+
+                <span th:text="${#dates.format(item.phtime, 'yyyy-MM-dd')}">
+                  <i class="layui-icon time">&#xe60a;</i>
+                </span>
+
+                <span>
+                  <i class="layui-icon comment">&#xe611;</i>
+                  评论(<span th:text="${item.number}"></span>)
+                </span>
+              </div>
+
+              <p class="content" th:text="${item.summary}">
+              </p>
+
+              <div class="footer">
+                <i class="layui-icon">&#xe66e;</i>
+                <span>#Guava</span>
+                <span>#Immutable</span>
+                <span>#Collections</span>
+                <a href="#" class="readmore">阅读全文<<</a>
+              </div>
+            </div>
+        </div>
+        
+        <div class="blog-list-page">
+          <div id="blog-pager" class="blog-pager">            
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+
+      <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+        <div class="row margin-bottom margin-left">
+          <div class="kind-panel">
+          <div class="kind-title">
+               <h2>文章分类</h2>
+          </div>
+          <div class="kind-body">
+            <div class="blog-category">
+              <span class="span-blog-category red">CCF(6)</span>
+              <span class="span-blog-category yellow">CCF(6)</span>
+              <span class="span-blog-category green">CCF(6)</span>
+              <span class="span-blog-category red">CCF(6)</span>
+              <span class="span-blog-category yellow">CCF(6)</span>
+              <span class="span-blog-category green">CCF(6)</span>
+              <span class="span-blog-category red">CCF(6)</span>
+              <span class="span-blog-category yellow">CCF(6)</span>
+            </div>
+          </div>
+         </div>
+        </div>
+
+        <div class="row margin-left margin-bottom">
+          <div class="kind-panel">
+            <div class="kind-title">
+              <h2>最新文章</h2>
+            </div>
+
+            <div class="kind-body">
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+              <div class="item-list">
+                <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+                <span>361阅/12评/138赞</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row margin-bottom margin-left">
+          <div class="kind-panel">
+          <div class="kind-title">
+               <h2>标签云</h2>
+          </div>
+          <div class="kind-body">
+            <div id="tag-cloud">
+
+            </div>
+          </div>
+         </div>
+        </div>
+
+        <div class="row margin-bottom margin-left">
+          <div class="kind-panel">
+          <div class="kind-title">
+          <h2>联系我</h2>
+          </div>
+          <div class="kind-body">
+            <p>邮箱:972260913@qq.com</p>
+            <p>QQ交流群:9090950</p>
+          </div>
+         </div>
+        </div>
+
+        <div class="row margin-bottom margin-left">
+          <div class="kind-panel">
+          <div class="kind-title">
+          <h2>友情链接</h2>
+          </div>
+          <div class="kind-body">
+            <ul>
+              <li><a href="#">我的github</a></li>
+              <li><a href="#">我的旅行</a></li>
+              <li><a href="#">我的码云</a></li>
+              <li><a href="#">layui框架</a></li>
+            </ul>
+          </div>
+         </div>
+        </div>
+
+      </div>
+
+      </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+//返回页面总数
+function returnCount(){
+	var pageNum=[[${PageNum}]];
+	return pageNum;
+}
+//返回当前页码
+function returnCurrent(){
+	var currentPageNum=[[${currentPageNum}]];
+	return currentPageNum;
+}
+</script>
+
+<script th:src="@{/static/layui/layui.js}"></script>
+
+<script>
+//JavaScript代码区域
+layui.use('element',function(){
+  var element = layui.element;
+  
+});
+</script>
+
+<script>
+var pageNum=returnCount();
+var currentPageNum=returnCurrent();
+
+console.log(pageNum);
+
+layui.use(['carousel','laypage'],function(){
+  var carousel = layui.carousel;
+  var laypage=layui.laypage;
+  var layer=layui.layer;
+
+  laypage.render({
+    elem:'blog-pager'
+    ,count:pageNum*10
+    ,limit:10
+    ,curr:currentPageNum
+    ,jump:function(obj,first){
+    	if(!first){
+    	window.location.href="/blog/"+obj.curr;
+    	}
+    }
+  });
+
+  //建造实例
+  carousel.render({
+    elem: '#test1'
+    ,width: '100%' //设置容器宽度
+    ,arrow: 'always' //始终显示箭头
+    ,height: '400px'
+    //,anim: 'updown' //切换动画方式
+  });
+});
+</script>
+
+</body>
+</html>

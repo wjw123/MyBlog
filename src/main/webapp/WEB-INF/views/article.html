@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>blog</title>
+
+  <link th:href="@{/static/layui/css/layui.css}" rel="stylesheet"/>
+  <link th:href="@{/static/layui/css/global.css}" rel="stylesheet"/>
+  <link th:href="@{/static/layui/css/content.css}" rel="stylesheet"/>
+  
+</head>
+<body>
+  <div class="layui-layout layui-layout-admin">
+
+	<div class="layui-header">
+    <div class="layui-container">
+    <a class="layui-logo" href="/blog"> 
+    	<img th:src="@{/static/img/logo.png}" alt="layui">
+    </a>
+
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="/blog">浏览文章</a></li>
+      <li class="layui-nav-item"><a href="">相册记录</a></li>
+      <li class="layui-nav-item"><a href="">用户留言</a></li>
+      <li class="layui-nav-item"><a href="javascript:;">关于我</a></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          贤心
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">退了</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/blog/login">登录</a></li>
+      <li class="layui-nav-item"><a href="/blog/admin/article">进入后台</a></li>
+    </ul>
+      </div>
+   </div>
+
+
+
+  <div class="layui-container container">
+
+   <div class="row">
+
+	<!--左边显示栏-->
+    <div class="layui-col-xs0 layui-col-sm0 layui-col-md8">
+    	<div class="row">
+    		<!--面包屑导航-->
+			<div class="blog-nav">
+				<span class="layui-breadcrumb" lay-separator="—">
+  					<a href="">首页</a>
+  					<a href="">国际新闻</a>
+  					<a href="">亚太地区</a>
+  					<a><cite>正文</cite></a>
+				</span>
+			</div>
+
+			<div class="blog-content">
+				<div class="blog-header text-center">
+					<input type="hidden" value="111">
+					<h1 class="blog-title" th:text="${article.title}"></h1>
+					<div class="blog-tips">
+
+						<span class="blog-tip-c font-green">
+							<i class="layui-icon">&#xe66f;</i>
+							博主&nbsp;
+						</span>
+
+						<span class="blog-tip-c font-red">
+							<i class="layui-icon">&#xe63c;</i>
+							<span th:text="${#dates.format(article.phtime, 'yyyy-MM-dd')}"></span>&nbsp;
+						</span>
+
+						<span class="blog-tip-c font-yellow">
+							<i class="layui-icon">&#xe611;</i>
+							评论(<span th:text="${article.number}"></span>)&nbsp;
+						</span>
+					</div>
+				</div>
+				<div class="blog-top margin-top">
+					<div class="blog-summary">
+						<strong><span th:text="${article.summary}"></span></strong>
+					</div>
+				</div>
+				<div class="blog-article margin-top" id="blog" th:utext="${article.content}">
+					
+				</div>
+
+				<div class="blog-zhuanzai">
+					转载请注明:<a href="#">我的博客</a>
+					>><a href="#" th:text="${article.summary}"></a>
+				</div>
+
+				<div class="blog-social">
+					<span class="blog-like blog-action">
+						<i class="layui-icon">&#xe60c;</i>
+						喜欢( 
+						<span id="content-like" class="count">141</span>
+						)
+					</span>
+					<span class="or">or</span>
+					<span class="blog-share blog-action">
+				       <i class="layui-icon">&#xe641;</i>
+						分享( 
+						<span id="content-like" class="count">141</span>
+						)
+					</span>
+				</div>
+
+				<div class="blog-donate text-center">
+					<p>您的支持是博主写作最大的动力，如果您喜欢我的文章，感觉我的文章对您有帮助，请狠狠点击下面的</p>
+					<button type="button" class="layui-btn layui-btn-danger btn-donate" id="btn-donate">我要小额赞助</button>
+				</div>
+
+				<div class="blog-tags margin-top">
+					<i class="layui-icon">&#xe642;</i>&nbsp;
+					<span>#Java</span>
+					<span>#GitHub</span>
+					<span>#后台开发</span>
+				</div>
+			</div>
+
+			<div class="blog-foot">
+				<span class="left">
+				<i class="layui-icon">&#xe65a;</i>
+				&nbsp;<a href="#">第三届阿里中间件挑战赛 初赛总结</a>
+				</span>
+				<span class="right">
+				 <a href="#">第三届阿里中间件挑战赛 初赛总结</a>&nbsp;
+				 <i class="layui-icon">&#xe65b;</i>
+				</span>
+			</div>
+
+			<div class="margin-top" id="hot-rank-blogs">
+				<div class="rank-panel">
+					<div class="panel-title">
+						<h2>热门排行</h2>
+					</div>
+					<div class="panel-body">
+						<div class="item-list">
+							<a href="#" class="item-link">关于本博客在本地运行的方法</a>
+							<span>12评论</span>
+						</div>
+						<div class="item-list">
+							<a href="#" class="item-link">关于本博客在本地运行的方法</a>
+							<span>12评论</span>
+						</div>
+						<div class="item-list">
+							<a href="#" class="item-link">关于本博客在本地运行的方法</a>
+							<span>12评论</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		 <!-- 评论展示 -->
+		  <div class="margin-top blog-comment" id="commentContainer" th:fragment="commentContainer">
+				<div>
+					<div class="comment-head">
+						<div class="comment-title">
+							<h2>热忱评论&nbsp;<span>(<span id="commentNum" th:text="${article.number}"></span>)</span></h2>
+						</div>
+			             <span class="comment-report">发表评论</span> 
+					</div>
+					
+ 					<div th:if="${#lists.isEmpty(comments)}">
+					<strong><span>沙发空缺中，还不快抢!</span></strong>
+ 					</div>
+					
+					<div id="commentsContainer" th:fragment="commentsContainer">
+					
+					<div th:each="item:${comments}" class="comment-lists">
+					   
+						 <div class="comment-main">
+							<div class="comment-avator">
+								<div class="comment-img">
+									<img class="layui-circle" th:src="@{/static/img/touxiang.jpg}">
+								</div>
+							</div>
+							<div class="comment-body">
+								<div class="comment-meta">
+									<span class="comment-author"><strong><span th:text="${item.consumer.name}"></span></strong></span>
+									<span th:text="${#dates.format(item.time, 'yyyy-MM-dd hh:ss:mm')}"></span>
+								</div>
+								<p class="comment-content">
+								   <span th:utext="${item.content}"></span>
+								</p>
+								<div class="comment-hint">
+									<span type="like">
+										<i class="layui-icon">&#xe6c6;</i>
+										<span>赞</span>
+										（<em>0</em>）
+									</span>
+									<span type="hate">
+										<i class="layui-icon">&#xe6c5;</i>
+										<span>踩</span>
+										（<em>0</em>）
+									</span>
+									<span type="reply">
+									    <i class="layui-icon">&#xe63a;</i>
+										<span>回复</span>
+										（<em>0</em>）
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					</div>
+					
+					<div th:if="${not #lists.isEmpty(comments)}" class="comment-pager">
+						<div id="list-page"></div>
+					</div>
+				</div>
+			</div> 
+			
+			<!--发表评论 -->
+			<div class="margin-top blog-comment" id="commentContainer">
+				<div>
+				
+				<div class="comment-head">
+					<div class="comment-title">
+						<h2>发表评论</h2>
+					</div>
+				</div>
+				
+				<div class="comment-lists">
+				  <div class="comment-main">				
+						<form class="layui-form" role="form">
+						  <div class="layui-form-item layui-form-text">
+						      <textarea id="comment_content" name="comment_content" lay-verify="comment_content" placeholder="输入评论内容" class="layui-textarea fly-editor">
+						      </textarea>
+						 </div>
+  							 
+						   <div class="layui-form-item">
+                              <button class="layui-btn" lay-filter="upcomment" lay-submit="">提交评论</button>
+                           </div>
+						</form>
+				 </div>
+				</div>
+				
+				</div>
+			</div>
+			
+			
+    	</div>
+    </div>
+
+
+    <!--右边显示栏-->
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+    <div class="row margin-bottom margin-left">
+      <div class="kind-panel">
+      <div class="kind-title">
+           <h2>文章分类</h2>
+      </div>
+      <div class="kind-body">
+        <div class="blog-category">
+          <span class="span-blog-category red">CCF(6)</span>
+          <span class="span-blog-category yellow">CCF(6)</span>
+          <span class="span-blog-category green">CCF(6)</span>
+          <span class="span-blog-category red">CCF(6)</span>
+          <span class="span-blog-category yellow">CCF(6)</span>
+          <span class="span-blog-category green">CCF(6)</span>
+          <span class="span-blog-category red">CCF(6)</span>
+          <span class="span-blog-category yellow">CCF(6)</span>
+        </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="row margin-left margin-bottom">
+      <div class="kind-panel">
+        <div class="kind-title">
+          <h2>最新文章</h2>
+        </div>
+
+        <div class="kind-body">
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+          <div class="item-list">
+            <a class="item-link" href="#">2018年Java开发者应该学习的这9个...</a>
+            <span>361阅/12评/138赞</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row margin-bottom margin-left">
+      <div class="kind-panel">
+      <div class="kind-title">
+           <h2>标签云</h2>
+      </div>
+      <div class="kind-body">
+        <div id="tag-cloud">
+
+        </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="row margin-bottom margin-left">
+      <div class="kind-panel">
+      <div class="kind-title">
+      <h2>联系我</h2>
+      </div>
+      <div class="kind-body">
+        <p>邮箱:972260913@qq.com</p>
+        <p>QQ交流群:9090950</p>
+      </div>
+     </div>
+    </div>
+
+    <div class="row margin-bottom margin-left">
+      <div class="kind-panel">
+      <div class="kind-title">
+      <h2>友情链接</h2>
+      </div>
+      <div class="kind-body">
+        <ul>
+          <li><a href="#">我的github</a></li>
+          <li><a href="#">我的旅行</a></li>
+          <li><a href="#">我的码云</a></li>
+          <li><a href="#">layui框架</a></li>
+        </ul>
+      </div>
+     </div>
+    </div>
+  </div>
+
+   </div>
+  </div>
+
+  </div>
+<script th:src="@{/static/layui/layui.js}"></script>
+
+<script th:inline="javascript">
+function returnId(){
+	var id=[[${article.id}]];
+	return id;
+}
+function getComments(){
+	var comments=[[${comments}]]
+	return comments;
+}
+function getNumber(){
+	var number=[[${number}]];
+	return number;
+}
+</script>
+
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+
+<script>
+layui.use('code', function(){ //加载code模块
+    layui.code({
+        elem:"pre",
+        title:'code',
+        skin:"notepad",
+        encode:true,
+        about:false
+    });
+	});
+</script>
+
+<!-- 定义发布评论内容 -->
+<script>
+var comm=getComments();
+console.log(comm);
+
+var obj={"id":"","consumer":"","aritcle":"","content":"","time":""};
+var layedit;
+var id=returnId();
+var number=getNumber();//评论数量
+var numberSize=5;//每页显示评论数量
+layui.use(['element','layer','form','layedit','laypage'],function(){
+	var element=layui.element;
+	var form=layui.form;
+	var layer=layui.layer;
+	var laypage=layui.laypage;
+	var counts=Math.floor(number/numberSize)+1;
+	console.log();
+	
+	  //评论页码设置
+	  laypage.render({
+		    elem:'list-page'
+		    ,count:counts*10
+		    ,jump:function(obj,first){
+		    	
+		    	if(!first){//防止首次刷新
+ 		            $.ajax({
+		                url:'/blog/comment/page',
+		                type:'get',
+		                data: {
+		                	articleId:id,PageNum:obj.curr
+		                },
+		                success:function(data){
+		                    $('#commentsContainer').html(data);
+		                },error:function(data){
+		                	layer.alert(data.responseText);
+		                }
+		            }); 
+		    	}
+		    }
+		  });
+	
+	$=layui.jquery;
+	layedit=layui.layedit;
+	  form.render();
+	  var index=layedit.build('comment_content',{
+		 tool:['face','link','unlink','|','strong','italic','underline','del','left','center','right']
+	     ,height:150
+	  });
+	  
+	  
+	//输入不为空验证
+	form.verify({
+			 comment_content:function(value){
+				var content=layedit.getContent(index);
+				var values=content.trim();
+				if(values.length<10)
+					return "请输入满10个字符"
+				}
+	});
+	  
+	form.on('submit(upcomment)',function(data){
+		var content=layedit.getContent(index);
+		obj.content=layedit.getContent(index);
+		obj.time=new Date();
+
+        $.ajax({
+            type: 'post',
+            dataType:'text',//定义数据的返回类型
+            url:'/blog/comment/add',
+            data:{content:content,authorid:1,aritcleid:id},
+            traditional:true,
+            success:function(result){
+              if(result=="success"){
+	            	   window.location.reload();
+              }else{
+                  layer.msg('评论失败:'+result,{
+                      icon:1,
+                      time:1000 //2秒关闭（如果不配置，默认是3秒）
+                 }, function(){
+                 });
+              }
+            },
+            error:function (result){
+          	  console.log(result);
+                layer.msg('加入失败:'+result,{
+                    icon: 1,
+                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+               }, function(){
+               });
+            }
+        }); 
+		return false;
+	});
+});
+</script>
+
+<!-- 判断字符串长度 -->
+<script>
+function strlen(str)
+{
+    var len = 0;
+    for (var i=0; i<str.length; i++) { 
+     var c = str.charCodeAt(i); 
+    //单字节加1 
+     if ((c >= 0x0001 && c <= 0x007e) || (0xff60<=c && c<=0xff9f)) { 
+       len++; 
+     }
+     else{ 
+      len+=2; 
+     } 
+    } 
+    return len;
+}
+</script>
+<!-- 评论分页 -->
+
+</body>
+</html>

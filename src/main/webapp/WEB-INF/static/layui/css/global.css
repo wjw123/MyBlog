@@ -1,0 +1,198 @@
+body{
+	background-color:#f2f2f2;
+}
+.container{
+	margin-top: 20px;
+	border-top:1px;
+}
+.layui-carousel img{
+	width:100%;
+	height:100%;
+}
+
+/***
+blog列表样式
+*/
+
+.blog-list{
+	margin-top:20px;
+}
+.blog{
+    padding: 1rem 2rem;
+    background-color: #FFF;
+    /* border: 1px solid; */
+    /* border-color: #eee; */
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.blog .title{
+	font-size:16px;
+}
+.blog .title .category{
+	color: #fff;
+    background-color: #1abc9c;
+    padding: 3px 6px;
+    font-size: 10px;
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
+}
+.blog .title .category i{
+	position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: -4px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-left: 4px solid #1abc9c;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+.blog .hint{
+	padding-top: 0.2rem;
+    font-size: 10px;
+}
+.blog .hint span{
+	margin-right: 5px;
+}
+.blog .hint .author{
+	color: #01AAED;
+}
+.blog .hint .time{
+	color: #ED0156;
+}
+.blog .hint .comment{
+	color:#01AAED;
+}
+.blog .content{
+	padding: 0.2rem 0;
+    text-indent: 2em;
+    font-size: 14px;
+    line-height: 22px;
+    color: #777;
+}
+.blog .footer{
+	font-size: 8px;
+	text-align: left;
+}
+.blog .footer i{
+	margin-right:5px;
+}
+.blog .footer span{
+	display: inline-block;
+    min-width: 10px;
+    padding: .25em 0.25em;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #EEE;
+}
+.blog .footer a:hover{
+	color: #5FB878;
+}
+.blog .footer a{
+	margin:0.15rem 0.15rem;
+    font-size:10px;
+    float:right;
+    color:#009688;
+}
+.blog-list-page{
+	background:#fff;
+	margin-bottom:1em!important;
+}
+.blog-list-page .blog-pager{
+	text-align:center;
+}
+
+.margin-bottom{
+	margin-bottom:1em;
+}
+.margin-left{
+	margin-left:20px;
+}
+.margin-top{
+	margin-top:10px;
+}
+
+.kind-panel{
+	background: #FFF;
+    padding: 0 2rem;
+}
+.kind-panel .kind-title{
+	height: 40px;
+    border-bottom: 1px solid #90bba8;
+}
+.kind-panel .kind-title h2{
+	line-height: 45px;
+    font-weight: normal;
+    font-size: 16px;
+}
+.kind-panel .kind-body{
+	padding: 1rem 0rem;
+}
+.kind-panel .kind-body .span-blog-category{
+	display: inline-block;
+    min-width: 10px;
+    margin: 0.25em 0;
+    width: 26%;
+    padding: .5em .625em;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #999;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.kind-panel .kind-body .item-list,.panel-body .item-list{
+	line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    list-style: decimal-leading-zero inside;
+    *list-style-type: decimal inside;
+    color: #009E94;
+    display: flex;
+    justify-content: space-between;
+}
+.kind-panel .kind-body .item-list .item-link,.panel-body .item-list .item-link{
+    max-width: 72%;
+    position: relative;
+    font-size: 14px;
+    padding: 0 0 0 13px;
+    transition: color .2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.kind-panel .kind-body .item-list span,.panel-body .item-list span{
+	color: #AAA;
+    font-size: 12px;
+}
+
+
+
+/***
+背景颜色显示
+**/
+.green{
+	background-color:#5FB878!important;
+}
+.red{
+	background-color:#FF5722!important;
+}
+.yellow{
+    background-color:#F7B824!important;
+}
+
+.font-green{
+	color:#5FB878!important;
+}
+.font-red{
+	color:#FF5722!important;
+}
+.font-yellow{
+	color:#F7B824!important;
+}

@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link th:href="@{/static/layui/css/layui.css}" rel="stylesheet"/>
+</head>
+<body>
+<form autocomplete="off" style="background-color:#fff!important;padding:20px" id="create-article" class="layui-form" role="form">
+
+<div class="layui-form-item">
+  <label class="layui-form-label">文章标题</label>
+  <div class="layui-input-block">
+    <input type="text" autocomplete="off" class="layui-input" id="title"
+                                        name="title" placeholder="请输入文章标题" lay-verify="title">
+  </div>
+</div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">文章类型</label>
+    <div class="layui-input-block">
+      <select lay-verify="required" id="typeid" name="typeid">
+        <option th:each="item:${aritcletypes}" th:value="${item.id}" th:text="${item.typename}"> 
+     </select>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+  <label class="layui-form-label">文章摘要</label>
+  <div class="layui-input-block">
+    <input type="text" autocomplete="off" class="layui-input" id="summary"
+                                        name="summary" placeholder="请输入文章摘要" lay-verify="title">
+  </div>
+  </div> 
+  
+  <div class="layui-form-item">
+  <label class="layui-form-label">文章标识</label>
+  <div class="layui-input-block">
+    <input type="text" autocomplete="off" class="layui-input" id="sign"
+                                        name="sign" placeholder="请输入文章标识" lay-verify="title">
+  </div>
+  </div> 
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">输入文章</label>
+    <textarea id="content" name="content" lay-verify="content" placeholder="输入文章内容" class="layui-textarea fly-editor">
+    </textarea>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-filter="add" lay-submit="">立即提交</button>
+    </div>
+  </div>
+  
+</form>
+
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+var layedit;
+var index;
+var obj={"id":"","typeid":"","title":"","content":"","phtime":"","number":"","summary":"","sign":""};
+layui.use(['element','layer','form','layedit'],function(){
+	  var element = layui.element;
+	  var layer = layui.layer;
+	  var form = layui.form;
+	  $=layui.jquery;
+	  layedit=layui.layedit;
+	  form.render();
+	  var index=layedit.build('content',{
+		 tool:['face','link','unlink','|','strong','italic','underline','del','left','center','right','code']
+	     ,height:150
+	  });
+	  
+	  
+	  //验证表单
+  	  form.verify({
+  			    title:function(value){
+  				    if(value.length<1||value.length>10){
+  				      return '标题的长度需控制在1到10个字之间';
+  				     }
+  				},
+  				content:function(value){
+	  				if(value.length<1){
+	  					return '请输入文章的内容';
+	  				}
+  				}
+  	    });
+	  
+	  //提交表单
+  	  form.on('submit(add)',function(data){
+  		  obj.typeid=data.field.typeid;
+  		  obj.title=data.field.title;
+  		  obj.summary=data.field.summary;
+  		  obj.sign=data.field.sign;
+  		  obj.content=layedit.getContent(index);
+  		  obj.phtime=new Date();
+  		  obj.number="0";
+  		  
+          $.ajax({
+              type: 'post',
+              dataType:'text',//定义数据的返回类型
+              url:'/blog/admin/addArticle',
+              data:{newmsg:JSON.stringify(obj)},
+              traditional: true,
+              success:function(result){
+                if(result=="success"){
+	            	   window.parent.location.reload();
+	            	   var index = parent.layer.getFrameIndex(window.name);
+	            	   parent.layer.close(index); 
+                }else{
+                    layer.msg('加入失败:'+result,{
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                   }, function(){
+                   });
+                }
+              },
+              error:function (result){
+            	  console.log(result);
+                  layer.msg('加入失败:'+result,{
+                      icon: 1,
+                      time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                 }, function(){
+                 });
+              }
+          });
+  		
+  		  return false;
+  	  });
+
+});
+</script>
+<script>
+layui.use('code', function(){ //加载code模块
+	  layui.code(); //引用code方法
+	});
+</script>
+</body>
+</html>

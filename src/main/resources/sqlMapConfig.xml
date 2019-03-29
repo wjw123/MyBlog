@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+  <typeAliases>
+  	 <!-- 类型别名 -->
+     <typeAlias type="com.wjw.blog.entity.album" alias="album" />
+     <typeAlias type="com.wjw.blog.entity.aritcle" alias="aritcle" />
+     <typeAlias type="com.wjw.blog.entity.aritcletype" alias="aritcletype" />
+     <typeAlias type="com.wjw.blog.entity.comment" alias="comment" />
+     <typeAlias type="com.wjw.blog.entity.consumer" alias="consumer" />
+     <typeAlias type="com.wjw.blog.entity.news" alias="news" />
+     <typeAlias type="com.wjw.blog.entity.photo" alias="photo" /> 
+  </typeAliases>
+  <mappers>
+     <mapper resource="mybatis/albumMapper.xml" />
+     <mapper resource="mybatis/aritcleMapper.xml" />
+     <mapper resource="mybatis/aritcletypeMapper.xml" />
+     <mapper resource="mybatis/commentMapper.xml" />
+     <mapper resource="mybatis/consumerMapper.xml" />
+     <mapper resource="mybatis/newsMapper.xml" /> 
+     <mapper resource="mybatis/photoMapper.xml" />       
+  </mappers>
+</configuration>

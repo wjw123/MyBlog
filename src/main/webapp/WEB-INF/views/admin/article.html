@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>文章管理</title>
+  <link th:href="@{/static/layui/css/layui.css}" rel="stylesheet"/>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+
+
+<!-- 引入顶部元素 -->
+<div th:replace="admin/common/top::topbar"></div>
+
+<!-- 引入左侧元素 -->
+<div th:replace="admin/common/left::leftbar(activeUri='article')"></div>  
+  
+  <div class="layui-body" id="app">
+  <div class="layui-container">
+    <blockquote class="layui-elem-quote" style="margin-top:20px;"><h1>文章管理&nbsp;</h1></blockquote>
+   
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>管理你的文章</legend>
+    </fieldset>
+    <div class="layui-row">
+      <div class="layui-col-md2 layui-col-sm2" style="margin-top:10px;">
+        <div style="display: inline-block; width: 140px; height: 210px; padding: 10px; border: 1px solid #ddd; overflow: auto;">
+        <ul id="demo1"></ul>
+      </div>
+      </div>
+
+      <div class="layui-col-md10 layui-col-sm10">
+      
+      <table id="datatable" lay-filter="datatable"></table>
+      <div id="page" style="text-align: left;"></div>
+    </div>
+  </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域 
+  </div>
+</div>
+  </div>
+
+<script th:src="@{/static/layui/layui.js}"></script>
+<script th:src="@{/static/layui/lay/modules/jquery.js}"></script>
+<script th:src="@{/static/ConfigJs/article.js}"></script> 
+
+<script th:inline="javascript">
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+function getAllarticles(){
+	var articles=[[${aritcletypes}]];
+	return articles;
+}
+</script>
+
+<script type="text/html" id="toolbar">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="add">添加博客</button>
+    <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteAll">批量删除</button>
+  </div>
+</script>
+
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="check">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="type">
+  {{#  if(d.typeid == 1){ }}
+       文章
+  {{#  } else { }}
+    	小说
+  {{#  } }}
+</script>
+
+<script type="text/javascript">
+function createTime(v){
+	var date = new Date(v);
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    m = m<10?'0'+m:m;
+    var d = date.getDate();
+    d = d<10?("0"+d):d;
+    var h = date.getHours();
+    h = h<10?("0"+h):h;
+    var M = date.getMinutes();
+    M = M<10?("0"+M):M;
+    var str = y+"-"+m+"-"+d+" "+h+":"+M;
+    return str;
+}
+</script>
+</body>
+</html>
